@@ -2,7 +2,6 @@
 分布式解决方案：springboot+dubbo+seata
 1、修改seata/conf下的文件registry.conf如下
 registry {
-  # file 、nacos 、eureka、redis、zk、consul、etcd3、sofa
   type = "file"
 
   file {
@@ -11,7 +10,6 @@ registry {
 }
 
 config {
-  # file、nacos 、apollo、zk、consul、etcd3
   type = "file"
 
   file {
@@ -20,7 +18,6 @@ config {
 }
 2、修改seata/conf下的文件file.conf如下  
 transport {
-  # tcp udt unix-domain-socket
   type = "TCP"
   #NIO NATIVE
   server = "NIO"
@@ -70,12 +67,9 @@ client {
   report.retry.count = 5
 }
 
-## transaction log store
 store {
-  ## store mode: file、db
   mode = "file"
 
-  ## file store
   file {
     dir = "sessionStore"
 
@@ -91,7 +85,6 @@ store {
     flush-disk-mode = async
   }
 
-  ## database store
   db {
     ## the implement of javax.sql.DataSource, such as DruidDataSource(druid)/BasicDataSource(dbcp) etc.
     datasource = "dbcp"
@@ -110,7 +103,6 @@ store {
   }
 }
 lock {
-  ## the lock store mode: local、remote
   mode = "remote"
 
   local {
@@ -141,11 +133,9 @@ transaction {
   undo.log.table = "undo_log"
 }
 
-## metrics settings
 metrics {
   enabled = false
   registry-type = "compact"
-  # multi exporters use comma divided
   exporter-list = "prometheus"
   exporter-prometheus-port = 9898
 }
