@@ -1,6 +1,6 @@
 # springbootdubboseata
-分布式解决方案：springboot+dubbo+seata
-1、修改seata/conf下的文件registry.conf如下
+分布式解决方案：springboot+dubbo+seata  
+1、修改seata/conf下的文件registry.conf如下  
 registry {  
   type = "file"  
 
