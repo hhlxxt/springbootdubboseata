@@ -44,39 +44,39 @@ transport {
   serialization = "seata"  
   compressor = "none"  
 }  
-service {
-  #vgroup->rgroup
-  vgroup_mapping.my_test_tx_group = "default"
-  #only support single node
-  default.grouplist = "192.168.1.5:8091" #此处为实际的ip地址
-  #degrade current not support
-  enableDegrade = false
-  #disable
-  disable = false
-  #unit ms,s,m,h,d represents milliseconds, seconds, minutes, hours, days, default permanent
-  max.commit.retry.timeout = "-1"
-  max.rollback.retry.timeout = "-1"
-}
+service {  
+  #vgroup->rgroup  
+  vgroup_mapping.my_test_tx_group = "default"  
+  #only support single node  
+  default.grouplist = "192.168.1.5:8091" #此处为实际的ip地址  
+  #degrade current not support  
+  enableDegrade = false  
+  #disable  
+  disable = false  
+  #unit ms,s,m,h,d represents milliseconds, seconds, minutes, hours, days, default permanent  
+  max.commit.retry.timeout = "-1"  
+  max.rollback.retry.timeout = "-1"  
+}  
 
-client {
-  async.commit.buffer.limit = 10000
-  lock {
-    retry.internal = 10
-    retry.times = 30
-  }
-  report.retry.count = 5
-}
+client {  
+  async.commit.buffer.limit = 10000  
+  lock {  
+    retry.internal = 10  
+    retry.times = 30  
+  }  
+  report.retry.count = 5  
+}  
 
-store {
-  mode = "file"
+store {  
+  mode = "file"  
 
-  file {
-    dir = "sessionStore"
+  file {  
+    dir = "sessionStore"  
 
-    # branch session size , if exceeded first try compress lockkey, still exceeded throws exceptions
-    max-branch-session-size = 16384
-    # globe session size , if exceeded throws exceptions
-    max-global-session-size = 512
+    # branch session size , if exceeded first try compress lockkey, still exceeded throws exceptions  
+    max-branch-session-size = 16384  
+    # globe session size , if exceeded throws exceptions  
+    max-global-session-size = 512  
     # file buffer size , if exceeded allocate new buffer
     file-write-buffer-cache-size = 16384
     # when recover batch read size
