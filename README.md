@@ -145,9 +145,9 @@ metrics {
 5、启动zookeeper  
 6、启动项目  
 7、测试  
-事务提交：http://localhost:8104/business/dubbo/buy
-事务回滚：http://localhost:8104/business/dubbo/roll
-使用postman测试，body为  
+事务提交：http://localhost:8104/business/dubbo/buy  
+事务回滚：http://localhost:8104/business/dubbo/roll  
+使用postman测试，body为    
 {  
     "userId":"1",  
     "commodityCode":"C201901140001",  
