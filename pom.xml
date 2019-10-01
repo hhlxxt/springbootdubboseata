@@ -23,6 +23,7 @@
         <module>storage</module>
         <module>order</module>
         <module>common</module>
+        <module>wms-service</module>
     </modules>
 
     <properties>
