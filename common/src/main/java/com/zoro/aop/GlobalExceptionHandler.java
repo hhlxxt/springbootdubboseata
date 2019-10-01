@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @Description  全局异常处理
  */
 
-@ControllerAdvice(basePackages = "com.sinochem.finance.hsy")
+@ControllerAdvice(basePackages = "com.zoro")
 @Slf4j
 public class GlobalExceptionHandler {
 

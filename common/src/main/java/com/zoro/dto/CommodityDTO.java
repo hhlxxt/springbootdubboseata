@@ -5,9 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Author: heshouyou
  * @Description 商品信息
- * @Date Created in 2019/1/13 16:25
  */
 @Data
 public class CommodityDTO implements Serializable {

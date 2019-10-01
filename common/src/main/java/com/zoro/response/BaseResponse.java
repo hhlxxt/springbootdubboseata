@@ -7,8 +7,7 @@ import java.io.Serializable;
 /**
  * 基本返回
  *
- * @author: heshouyou
- * @date: 2018-07-03 16:46
+ * @author:
  */
 @Data
 public class BaseResponse implements Serializable {

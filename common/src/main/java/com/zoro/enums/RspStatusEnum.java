@@ -3,9 +3,7 @@ package com.zoro.enums;
 /**
  * The enum Rsp status enum.
  *
- * @Author: heshouyou
  * @Description
- * @Date Created in 2019/1/14 10:18
  */
 public enum  RspStatusEnum {
     /**
