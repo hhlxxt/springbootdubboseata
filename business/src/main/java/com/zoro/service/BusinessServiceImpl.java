@@ -1,6 +1,7 @@
 package com.zoro.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.zoro.config.mq.RabbitmqProducter;
 import com.zoro.dto.BusinessDTO;
 import com.zoro.dto.CommodityDTO;
 import com.zoro.dto.OrderDTO;
@@ -11,6 +12,7 @@ import com.zoro.exception.DefaultException;
 import com.zoro.response.ObjectResponse;
 import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,6 +26,9 @@ public class BusinessServiceImpl implements BusinessService{
 
     @Reference(version = "1.0.0")
     private OrderDubboService orderDubboService;
+
+    @Autowired
+    RabbitmqProducter producter ;
 
     /**
      * 处理业务逻辑
@@ -50,6 +55,14 @@ public class BusinessServiceImpl implements BusinessService{
 
         if (storageResponse.getStatus() != 200 || response.getStatus() != 200) {
             throw new DefaultException(RspStatusEnum.FAIL);
+        }
+
+        //投递消息到rabbitmq
+        try {
+            orderDTO.setOrderNo(response.getData().getOrderNo());
+            producter.sendOrder(orderDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         objectResponse.setStatus(RspStatusEnum.SUCCESS.getCode());
