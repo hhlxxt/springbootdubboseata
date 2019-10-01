@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
  *  订单服务
  * </p>
  *
- * @author heshouyou
- * @since 2019-01-13
  */
 @RestController
 @RequestMapping("/order")
