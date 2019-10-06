@@ -1,6 +1,7 @@
 package com.zoro.config.mq;
 
 import com.zoro.dto.OrderDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.util.Map;
  * rabbitmq消息消息配置
  */
 @Configuration
+@Slf4j
 public class RabbitmqProducter {
     //自动注入RabbitTemplate模板类
     @Autowired
@@ -24,10 +26,12 @@ public class RabbitmqProducter {
     final RabbitTemplate.ConfirmCallback confirmCallback = new RabbitTemplate.ConfirmCallback() {
         @Override
         public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-            System.err.println("correlationData: " + correlationData);
-            System.err.println("ack: " + ack);
+            log.info("correlationData:{} " , correlationData);
+
             if(!ack){
-                System.err.println("异常处理....");
+                log.info("消息消费异常....,订单id:{}",correlationData);
+            }else {
+                log.info("消息消费完成....,订单id:{}",correlationData);
             }
         }
     };
@@ -37,8 +41,8 @@ public class RabbitmqProducter {
         @Override
         public void returnedMessage(org.springframework.amqp.core.Message message, int replyCode, String replyText,
                                     String exchange, String routingKey) {
-            System.err.println("return exchange: " + exchange + ", routingKey: "
-                    + routingKey + ", replyCode: " + replyCode + ", replyText: " + replyText);
+            log.info("消息投递失败,return exchange: {}, routingKey: {}, replyCode:{}, replyCode: {}" +
+                    ", replyText: {}",exchange,routingKey,replyCode,replyCode,replyText);
         }
     };
 
