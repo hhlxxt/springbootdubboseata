@@ -12,6 +12,7 @@ import com.zoro.exception.DefaultException;
 import com.zoro.response.ObjectResponse;
 import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
  * @Description  Dubbo业务发起方逻辑
  */
 @Service
+@Slf4j
 public class BusinessServiceImpl implements BusinessService{
 
     @Reference(version = "1.0.0")
@@ -38,7 +40,7 @@ public class BusinessServiceImpl implements BusinessService{
     @Override
     @GlobalTransactional(timeoutMills = 300000, name = "dubbo-seata-business")
     public ObjectResponse handleBusiness(BusinessDTO businessDTO) {
-        System.out.println("开始全局事务，XID = " + RootContext.getXID());
+        log.info("调用链开始全局事务，XID = {}",RootContext.getXID());
         ObjectResponse<Object> objectResponse = new ObjectResponse<>();
         //1、扣减库存
         CommodityDTO commodityDTO = new CommodityDTO();
@@ -75,6 +77,7 @@ public class BusinessServiceImpl implements BusinessService{
     @GlobalTransactional(timeoutMills = 300000, name = "dubbo-seata-business")
     public ObjectResponse handleRollbackBusiness(BusinessDTO businessDTO) {
         System.out.println("开始全局事务，XID = " + RootContext.getXID());
+
         ObjectResponse<Object> objectResponse = new ObjectResponse<>();
         //1、扣减库存
         CommodityDTO commodityDTO = new CommodityDTO();
