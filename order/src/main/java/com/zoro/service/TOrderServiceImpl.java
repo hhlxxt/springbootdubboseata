@@ -63,6 +63,7 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
             return response;
         }
 
+        response.setData(orderDTO);
         response.setStatus(RspStatusEnum.SUCCESS.getCode());
         response.setMessage(RspStatusEnum.SUCCESS.getMessage());
         return response;
